@@ -1,1 +1,32 @@
-site_name: My Docs
+site_name: Sanjay Khirwadkar's Portfolio
+site_url: https://khirwadkar.github.io/
+site_author: Sanjay Khirwadkar
+site_description: >-
+  I am Sanjay Khirwadkar and this is my professional portfolio
+
+
+# Repository
+#repo_name: khirwadkar/khirwadkar.github.io
+#repo_url: https://github.com/khirwadkar/khirwadkar.github.io
+
+# Configuration
+theme:
+  name: material
+  logo: images/SanjayK.jpg
+
+# Additional configuration
+#extra:
+#  analytics:
+#    provider: google
+#    property: G-4PZ4G86YR0
+
+# https://jimandreas.github.io/mkdocs-material/reference/meta-tags/#metadata
+# https://jimandreas.github.io/mkdocs-material/setup/setting-up-navigation/#:~:text=Sometimes%20it's%20desirable%20to%20hide,%2D%2D%2D%20%23%20Document%20title%20...
+markdown_extensions:
+  - meta
+
+# Page tree
+nav:
+  - Portfolio: index.md
+
+
