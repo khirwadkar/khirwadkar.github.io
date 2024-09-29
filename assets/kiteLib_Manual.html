@@ -1,0 +1,672 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+  <head>
+    <meta http-equiv="CONTENT-TYPE" content="text/html; charset=iso-8859-1">
+    <title>kiteLib Manual</title>
+    <meta name="GENERATOR" content="StarOffice/5.2 (Win32)">
+    <meta name="AUTHOR" content="Sanjay Khirwadkar">
+    <meta name="CREATED" content="20010829;16084990">
+    <meta name="CHANGEDBY" content="Sanjay Khirwadkar">
+    <meta name="CHANGED" content="20020222;16422121">
+  </head>
+
+  <body bgcolor="white" style="margin-left: 5%; margin-right: 5%;">
+    <H1 id="top_of_page" align="center">Details of kiteLib Foundation Class API</H1>
+    <!--
+    <p align="center" style="margin-bottom: 0in;">
+       <font size="4"><b><a name="top_of_page"></a>Details of Linux <span style="text-decoration: underline;">kiteLib</span>
+Foundation Class API</b>
+       </font>
+    </P>
+    -->
+    <P align="justify" style="margin-bottom: 0in;">
+      <font size="2">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
+	 The main goals of designing the <B>Mywin</B> class were
+	 to enable the students to develop C++ programs with 
+	 <I>Graphical User Interface</I> and facilitate learning about
+	 computer graphics. In my opinion, the <B>Mywin</B> class has 
+	 achieved these goals. This manual was created to act as 
+	 a quick reference to the member functions of the <B>Mywin</B> 
+	 class. It is to be used in conjuction with the theory 
+	 lecture discussions during the <I>C++ programming course</I>. 
+	 Also note that the windows created as objects of this class 
+	 should normally not be overlapping. While the program is running, 
+	 these window objects should not be moved, resized,
+	 minimized or closed. Although, this is not prevented, 
+	 the effect of these actions would be to clear the contents 
+	 already displayed on the window object, instantaneously; 
+	 this may cause the program to go haywire, unless the programmer 
+	 has taken special care to tackle these situations.
+      </font>
+    </P>
+    <BR />
+    <UL>
+        <li><a href="#constructor">Constructors</a></li>
+	<li><a href="#WinPrint">winPrint</a></li>
+	<li>Input functions</li>
+	   <ul>
+	       <li><a href="#kiteGetchar">kiteGetchar</a></li>
+	       <li><a href="#kiteGetint">kiteGetint</a></li>
+	       <li><a href="#kiteGetdouble">kiteGetdouble</a></li>
+	       <li><a href="#kiteGetstr">kiteGetstr</a></li>
+	       <li><a href="#kiteGetche">kiteGetche</a></li>
+	       <li><a href="#kiteGetch">kiteGetch</a></li>
+	   </ul>
+	<li>Functions for setting window attributes</li>
+	   <ul>
+	       <li><a href="#GetSetForeColor">GetSetForeColor</a></li>
+	       <li><a href="#GetSetBackColor">GetSetBackColor</a></li>
+	   </ul>
+	<li>Inspector functions telling window attributes</li>
+	   <ul>
+	       <li><a href="#strpixlen">strpixlen</a></li>
+	       <li><a href="#getWinWidth">getWinWidth</a></li>
+	       <li><a href="#getWinHeight">getWinHeight</a></li>
+	   </ul>
+	<li>Facilitator functions</li>
+	   <ul>
+	       <li><a href="#activate">activate</a></li>
+	       <li><a href="#close">close</a></li>
+	       <li><a href="#clear">clear</a></li>
+	       <li><a href="#clrnchars">clrnchars</a></li>
+	       <li><a href="#kiteFlush">kiteFlush</a></li>
+	   </ul>
+	<li>Graphics functions</li>
+	   <ul>
+	       <li><a href="#point">point</a></li>
+	       <li><a href="#line">line</a></li>
+	       <li><a href="#arc">arc</a></li>
+	       <li><a href="#circle">circle</a></li>
+	       <li><a href="#ellipse">ellipse</a></li>
+	       <li><a href="#polygon">polygon</a></li>
+	       <li><a href="#filledRectang">filledRectang</a></li>
+	       <li><a href="#filledEllipse">filledEllipse</a></li>
+	       <li><a href="#filledPolygon">filledPolygon</a></li>
+	   </ul>
+    </UL>
+    <BR />
+    <BR />
+
+
+     
+     <p align="justify" style="margin-bottom: 0in;"><br />
+     </p>
+     <p id="constructor" align="justify" style="margin-bottom: 0in;"><font size="3"><b>'Mywin'
+     Constructors:</b></font></p>
+     <p align="justify" style="margin-bottom: 0in;"><font size="3"> The
+     'Mywin' class has two constructors. The default (parameterless)
+     constructor creates a window object of 400 pixels width and 300 pixels
+     height; the title of the window would be "KITE window". The other
+     constructor has 5 parameters. To create a
+     window object with the second constructor, use the format as in the
+     following example-</font></p>
+     <p align="justify" style="margin-bottom: 0in;"><font size="3"> Mywin
+     w1("My Window", 100, 125, 400, 300);</font></p>
+     <p align="justify" style="margin-bottom: 0in;"><font size="3">The
+     first parameter, is the string that would appear in the title bar of
+     the resultant window. The second and the third parameters (which
+     should be unsigned integers) are the x and y coordinates in pixels of
+     the upper left corner of the window. In other words, using the second
+     parameter, we are
+     specifying the distance in pixels between left edge of the monitor
+     screen &amp; left edge of the window and using the third parameter,
+     distance in pixels between
+     top edge of the screen &amp; top edge of the window.&nbsp; The last two
+     parameters (again unsigned ints) specify the width and height in pixels
+     of the desired window object.<BR />
+     </font><font size="4"><span style=""><font size="3">Once the
+     window is created, all the coordinates are 'window relative', i.e.,
+     the origin is upper-left corner of the client area of the window. The
+     coordinates are measured in pixels. <u>This applies to all the
+     functions described below.</u>&nbsp;&nbsp;&nbsp; <BR />
+     </font></span></font></p>
+
+
+     <p align="justify" style="margin-bottom: 0in;"><br />
+     </p>
+     <p align="justify" id="activate"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>void activate( );</b></font></p>
+     <p align="justify" style="margin-bottom: 0in;"><font size="3"> This
+     function is useful, when you have created more than one window. By
+     default, the active window would be the one created last. If you want
+     to switch focus to other window, then call this member function of
+     that window.<BR />
+     </font></p>
+
+
+     <p align="justify" style="margin-bottom: 0in;"><br />
+     </p>
+     <p align="justify" id="clear"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>void clear( );</b></font></p>
+     <p align="justify" style="margin-bottom: 0in;"><font size="3"> This
+     function clears the window of the present contents and fills it with
+     the current background color.</font></p>
+
+
+     <p align="justify" style="margin-bottom: 0in;">
+     <BR />
+     </p>
+     <p align="justify" id="clrnchars"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>void clrnchars(int x, int y, int n);</b></font></p>
+     <p align="justify" style="margin-bottom: 0in;"><font size="4"><span
+      style=""><font size="3"> This
+     function clears a part of the window. It clears the space that would be
+     approximately taken by
+     'n' characters, if they were displayed using <span
+      style="font-style: italic;">winPrint()</span> function, starting from
+     (x, y) coordinate position.&nbsp;<span style="text-decoration: none;">
+     The band cleared gets the current background color. <BR />
+     </span></font></span></font></p>
+
+
+     <p align="justify" style="margin-bottom: 0in;"><font size="4"><span
+      style=""><font size="3"><span style="text-decoration: none;">
+      <BR />
+     </span></font></span></font></p>
+     <p align="justify" id="kiteFlush"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;"><font
+      size="3"><b>void kiteFlush( ) ;</b></font></p>
+     <font size="4"><span style=""><font size="3"> This
+     function flushes the request queue to the X server.<BR />
+     <BR />
+     </font></span></font>
+
+
+     <p align="justify" style="margin-bottom: 0in; text-decoration: none;">
+     <BR />
+     </p>
+     <p align="justify" id="GetSetForeColor"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>COLORREF GetSetForeColor(COLORREF fg);</b></font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> This function sets the color of the subsequently drawn
+     text (using the <span style="font-style: italic;">winPrint</span>
+     function described elsewhere) to the
+     argument color. It returns the previous text color. The color values
+     are specified using <span style="font-style: italic;">RGB() </span>function
+     as a triad of red, green and blue color intensities,
+     which range from 0 to 255. The default value of text color is black.</font></p>
+     
+
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <BR />
+     </p>
+     <p align="justify" id="GetSetBackColor"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>COLORREF GetSetBackColor(COLORREF bg);</b></font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> This function sets the <i>background</i> color of the
+     subsequently drawn text to the given argument color. It returns the
+     current (previous to this setting) background color. The default
+     value of text background color is white.</font></p>
+
+
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <BR />
+     </p>
+     <p align="justify" id="WinPrint"
+	style="margin-bottom: 0in;"><b><span
+      style="text-decoration: none;"><span style="font-style: normal;"><font
+      size="3">void
+     winPrint(int x, int y, char *str);</font></span></span></b></p>
+     <p align="justify" style="margin-bottom: 0in;"> This function prints
+     the
+     argument string at the given (x, y) coordinate position, in the
+     current text color on the current text background color.<BR />
+     </p>
+     <p style="margin-bottom: 0in; text-align: right;"><a href="#top_of_page">Go
+	     to the <I>Contents</I> page...</a></p>
+
+
+     <p align="justify" style="margin-bottom: 0in;">
+     <BR />
+     </p>
+     <p align="justify" id="kiteGetche"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>int kiteGetche(int x, int y);</b></font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> This function shows a cursor at the given (x,
+     y) position and will wait for the user to input some character. It
+     will return the ASCII value of the character input. If the character
+     is printable, then it will be echoed at cursor position, in current
+     text color on the current text background.</font></p>
+
+
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <BR />
+     </p>
+     <p align="justify" id="kiteGetchar"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>int kiteGetchar(int x, int y);</b></font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> This function is similar to 'kiteGetche' function; but
+     here, the user has to press ENTER key after the character to indicate
+     end of input.</font></p>
+
+
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <BR />
+     </p>
+     <p align="justify" id="kiteGetch"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>POINT kiteGetch(char&amp; ch);</b></font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> This function waits for the user to either input a
+     character or click the mouse. 
+     If user presses a key on the keyboard, then its ASCII
+     code is stored in the argument character variable. The character input
+     is not echoed on the window. The return value is point (0, 0) in this
+     case. On the other hand, if the user clicks mouse instead of using
+     keyboard, then coordinates of the point where the mouse was clicked, are returned in
+     pixel units.&nbsp; In the mouse click case, NULL character '\0' is
+     stored in the argument <span style="font-style: italic;">ch</span>.<BR />
+     </font></p>
+
+
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <BR />
+     </p>
+     <p align="justify" id="kiteGetint"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>int kiteGetint(int x, int y, int n=0);</b></font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> This function waits for the user to input an integer.
+     The cursor would be waiting at the given coordinate position (x, y).
+     The input is terminated either when ENTER is pressed or when 'n'
+     digits have been typed, whichever occurs earlier. A character which
+     can not be part of an integer is ignored. The third argument has
+     default value of 0, which means that there is no restriction on the
+     number of digits and only ENTER can terminate the input. The function
+     returns the integer input by the user.</font></p>
+
+
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <BR />
+     </p>
+     <p align="justify" id="kiteGetdouble"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>double kiteGetdouble(int x, int y);</b></font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> This function accepts a 'float' or a 'double' number at
+     the given position (x, y). It returns the number that is input by the
+     user as 'double'.</font></p>
+
+
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <BR />
+     </p>
+     <p align="justify" id="kiteGetstr"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>int kiteGetstr(int x, int y, char *str, int n);</b></font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> This function waits for the user to input a string. The
+     cursor would be waiting at the position (x, y) provided as first two
+     arguments. The string input by the user is stored in the string
+     variable 'str' to be given as the third argument. The fourth argument
+     'n' specifies the maximum number of characters that can be input.
+     The input terminates when either the user types ENTER key or inputs
+     (n-1) characters. The resultant string is null-terminated. The
+     function returns the number of characters stored in 'str'.<BR />
+     </font></p>
+
+
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <BR />
+     </p>
+     <p align="justify" id=kiteIsHit"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>Bool kiteIsHit( );</b></font></p>
+     <p align="justify" style="margin-bottom: 0in;"> This function, when
+     executed, checks if the user has either clicked left mouse button or
+     pressed a key. If any of these events has occurred, it returns true;
+     otherwise, it returns false. Note that the function does not wait for
+     the user.<BR />
+     </p>
+
+
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <BR />
+     </p>
+     <p align="justify" id="kiteIsHit-2"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>Bool kiteIsHit(POINT&amp; p1, char&amp; ch);</b></font></p>
+     <p align="justify" style="margin-bottom: 0in;"> This function, 
+     like its parameterless overloaded version, checks if the user has either 
+     clicked left mouse button or pressed a key. If any of these events has 
+     occurred, it returns true; otherwise, it returns false. More over, it stores
+     the user input information in the argument variables. 
+     If user has pressed a key on the keyboard, then its ASCII
+     code is stored in the argument character variable. The character input
+     is not echoed on the window. The POINT argument variable is set to point
+     (0, 0) in this case. On the other hand, if the user clicks mouse instead of using
+     keyboard, then coordinates of the point where the mouse was clicked, are stored in
+     argument <I>p1</I>.&nbsp; and NULL character '\0' is
+     stored in the argument <span style="font-style: italic;">ch</span>.<BR />
+     Note that the function does not wait for the user.<BR />
+     </p>
+
+
+     <p align="justify" style="margin-bottom: 0in;">
+     <BR />
+     </p>
+     <p align="justify" id="strpixlen"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>int strpixlen(char *str);</b></font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> This function returns the length in pixels of the band
+     that the argument string would occupy, when printed with <span
+      style="font-style: italic;">winPrint( )</span> function.</font></p>
+
+
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <BR />
+     </p>
+     <p align="justify" id="getWinWidth"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>int getWinWidth( );</b></font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> This function returns the width of the client area of
+     the window object, in pixels.</font></p>
+
+
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <BR />
+     </p>
+     <p align="justify" id="getWinHeight"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>int getWinHeight( );</b></font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> This function returns the height of the client area of
+     the window object, in pixels.<BR />
+     </font></p>
+
+
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <BR />
+     </p>
+     <p align="justify" id="point"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>void point(int x, int y, COLORREF c);</b></font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> This function draws a point (i.e. puts ON the pixel),
+     at pixel position (x, y) given as first two arguments, in the color
+     given
+     as third argument.</font></p>
+
+
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <BR />
+     </p>
+     <p align="justify" id="line"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>void line(int x1, int y1, int x2, int y2, COLORREF c
+     = RGB(0, 0, 0),</b></font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b> int penWidth =
+     0, int penStyle = PS_SOLID);</b></font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> This function draws a line segment between points (x1,
+     y1) and (x2, y2), the coordinates of which are given as the first
+     four arguments. The line is drawn in the color given in the fifth
+     argument (default, BLACK). You can specify the width of the line in
+     pixels, in the sixth argument. The default value zero, means one
+     pixel wide line will be drawn. You can also specify the line style in
+     the seventh argument. The following macros can be used to set the
+     line style-</font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3">PS_SOLID to draw usual solid line (default case).</font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3">PS_DASH -- -- -- -- -- -- -- -- --</font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3">PS_DOT . . . . . . . . . . . . . . . . . . . . .</font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3">PS_DASHDOT -- . -- . -- . -- . -- . --</font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3">PS_DASHDOTDOT -- .. -- .. -- .. -- .. -- ..</font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> Note that line width greater than one pixel, is
+     applicable only to PS_SOLID. If you set the line width to 3 and line
+     style to PS_DASH, then solid line with 3 pixels width will be drawn
+     and not a dashed line.<BR />
+     (Till the writing of this manual, the <span style="font-style: italic;">penWidth</span>
+     and <span style="font-style: italic;">penStyle</span> parameters are
+     ineffective.)<BR />
+     </font></p>
+
+
+     <p
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none; text-align: right;">
+     <a href="#top_of_page">Go to the <I>Contents</I> page...</a>
+     </p>
+
+
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <BR />
+     </p>
+     <p align="justify" id="circle"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>void circle(int xc, int yc, int r, COLORREF c =
+     RGB(0, 0, 0));</b></font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> This function draws a circle at the center specified by
+     the first two arguments and with the radius specified by the third
+     argument. The color of the circle circumference would be specified in
+     the fourth argument. If it is not specified, the default color is
+     black.</font></p>
+
+
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <BR />
+     </p>
+     <p align="justify" id="ellipse"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>void ellipse(int xc, int yc, int xr, int yr, COLORREF
+     c = RGB(0, 0, 0));</b></font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> This function draws an ellipse at the center specified
+     by the first two arguments. The horizontal radius is specified by the
+     third argument, while the vertical radius is specified by the fourth
+     argument. If the vertical and horizontal radii are equal, then a
+     circle would be drawn. The fifth argument specifies the color of the
+     ellipse.</font></p>
+
+
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <BR />
+     </p>
+     <p align="justify" id="polygon"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>void polygon(POINT *apt, int n, COLORREF c = RGB(0,
+     0, 0));</b></font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> This function produces a closed polygon. The vertices
+     of the
+     polygon are specified by the POINT array in the first argument. The
+     second argument specifies the number of points to be considered out
+     of this array. The last arguments specifies the color of the polygon.</font></p>
+
+
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <BR />
+     </p>
+     <p align="justify" id="arc"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>void arc(int xc, int yc, int xr, int yr, int
+     start_ang, int included_ang,</b></font></p>
+     <p align="justify" style="margin-bottom: 0in;"><b><span
+      style="text-decoration: none;"><span style="font-style: normal;"><font
+      size="3"> COLORREF
+     c = RGB(0, 0, 0));</font></span></span></b></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> This function draws a part of an ellipse. The first
+     four arguments have same work as the first four arguments of the
+     'ellipse' function. The fifth argument specifies the start angle and
+     the sixth argument specifies the included angle of the arc. These
+     angles
+     are measured from positive x-axis in counter-clockwise direction and
+     are to be specified in degrees. The last argument&nbsp; specifies
+     the color of the arc.</font></p>
+
+
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <BR />
+     </p>
+     <p align="justify" id="filledRectang"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;"><font
+      size="3"><b>void filledRectang(int xLeft, int yTop, int width,
+     int height,</b></font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b> COLORREF c = RGB(255, 255, 255), int pattern
+     = -1);</b></font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> This function produces a solid or filled rectangle. The
+     color of the filling is given by the fifth argument. The first two
+     arguments specify the coordinates of the upper left corner of the
+     rectangle. The third and the fourth arguments specify the width and the
+     height of the rectangle. By default,
+     the rectangle will be filled with solid color; but if you specify the
+     last (sixth) argument as one of the following possible macros, then
+     the rectangle will be hatched, instead of solid-filled.</font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> HS_HORIZONTAL, HS_BDIAGONAL, HS_VERTICAL, HS_FDIAGONAL,
+     HS_CROSS, HS_DIAGCROSS.</font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> See for yourself, how these various patterns are, by
+     using them. (Note: Till the writing of this manual, the parmeter <span
+      style="font-style: italic;">pattern</span> is ineffective.)<BR />
+     </font></p>
+
+
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <BR />
+     </p>
+     <p align="justify" id="filledEllipse"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>void filledEllipse(int xc, int yc, int xr, int yr,</b></font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b> COLORREF c = RGB(255, 255, 255), int pattern
+     = -1);</b></font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> This function produces a solid or filled-up ellipse.
+     The first five arguments have same meaning as those of the 'ellipse'
+     function. The last argument specifies the fill-pattern as in the
+     'filledRectang' function. </font><font size="3">(Note: Till the
+     writing of this manual, the parmeter <span style="font-style: italic;">pattern</span>
+     is ineffective.)</font></p>
+
+
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <BR />
+     </p>
+     <p align="justify" id="filledPolygon"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b>void filledPolygon(POINT *apt, int n,</b></font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"><b> COLORREF c = RGB(255, 255, 255), int pattern
+     = -1);</b></font></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> This function produces a filled-up polygon. The
+     vertices of the polygon are specified by the POINT array in the first
+     argument. The second argument specifies the number of points to be
+     considered out of this array. The last two arguments are same as the
+     last two arguments of the 'filledRectang' function.<BR />
+     </font><font size="3">(Note: Till the writing of this manual, the
+     parmeter <span style="font-style: italic;">pattern</span> is
+     ineffective.)</font><BR />
+
+
+     </p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <BR />
+     </p>
+     <p align="justify" id="close"
+	style="margin-bottom: 0in;"><b><span
+      style="text-decoration: none;"><span style="font-style: normal;"><font
+      size="3">void
+     close( );</font></span></span></b></p>
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <font size="3"> This function closes and destroys the window object.</font></p>
+
+
+     <p
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none; text-align: right;">
+     <a href="#top_of_page">Go to the <I>Contents</I> page...</a><br />
+     </p>
+
+
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;"><BR />
+     </p>
+     <p align="center"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     </p>
+     <HR />
+     <p align="justify"
+      style="margin-bottom: 0in; font-style: normal; text-decoration: none;">
+     <BR />
+     </p>
+     <BR />
+     <p align="justify" style="margin-bottom: 0in;"><BR />
+     </p>
+     
+
+
+  </body>
+</html>
